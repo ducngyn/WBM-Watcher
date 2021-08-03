@@ -1,6 +1,9 @@
 # Sensitive data is being accessed through environemt variables
 # more info: https://www.youtube.com/watch?v=IolxqkL7cD8&ab_channel=CoreySchafer
 import os
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
 
 def fillForm(driver):
     firstName = 'Duc'
@@ -42,3 +45,18 @@ def fillForm(driver):
     sendFormButton= driver.find_element_by_xpath('//*[@id="c722"]/div/div/form/div[2]/div[14]/div/div/button')
     #sendFormButton.click()
     print('done')
+
+
+def applyForApartment(browser, entry):
+    roomCount = float(entry.find_element(By.XPATH, './div[2]/article/div/ul[1]/li[3]/div[2]').text)
+    flatSize = entry.find_element(By.XPATH, './div[2]/article/div/ul[1]/li[2]/div[2]').text
+    flatSize = float(flatSize[:4].replace(',','.'))
+
+    if (roomCount > 1) and (flatSize > 20):
+        # Open apartment in new tab 
+        # fill out the form and close the tab afterwards
+        entry.find_element(By.XPATH, './div[2]/article/div/p[3]/a').send_keys(Keys.CONTROL + Keys.RETURN)
+        browser.switch_to.window(browser.window_handles[-1])
+        fillForm(browser)
+        browser.close()
+        browser.switch_to.window(browser.window_handles[-1])
