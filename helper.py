@@ -39,5 +39,6 @@ def fillForm(driver):
     privacyCheckbox = driver.find_element_by_xpath('//*[@id="c722"]/div/div/form/div[2]/div[13]/div/div/div[1]/label')
     privacyCheckbox.click()
 
-    sendFormButton= driver.find_element_by_xpath('//*[@id="c722"]/div/div/form/div[2]/div[13]/div/div/div[1]/label')
-    sendFormButton.click()
+    sendFormButton= driver.find_element_by_xpath('//*[@id="c722"]/div/div/form/div[2]/div[14]/div/div/button')
+    #sendFormButton.click()
+    print('done')
